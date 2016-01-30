@@ -11,7 +11,7 @@ public class AnimalLineManage : MonoBehaviour {
 
 	private Image[] lines = new Image[12];  //干支のイメージ配列
 	private bool[] judges = new bool[12];
-	private int currentNum;
+	public int currentNum;
 	private bool finish;
 	public Image one;
 	public Image two;
@@ -65,17 +65,13 @@ public class AnimalLineManage : MonoBehaviour {
 				StartCoroutine ("turnOff", i);
 			}
 		}
+	}
 
-		if (Input.GetKeyDown (KeyCode.A)) {
-			judges [currentNum] = false;
-			currentNum++;
-			Debug.Log ("passed");
-			if (currentNum >= 12) {
-				currentNum = 0;
-			}
-			judges [currentNum] = true;
+	void FixedUpdate(){
+		for(int i = 0; i < 12; i++){
+			judges[i] = false;
 		}
-			
+		judges [currentNum];
 	}
 
 	private IEnumerator turnOn(int num){
