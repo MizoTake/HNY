@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class mbGameManager : MonoBehaviour {
+public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 
 	public mbModelController m_ModelController;
 
 	int m_playerIndex = -1;
 
 	int m_playerMax = 0;
+    
+    void Awake(){
+        SetPlayerNumber(ReadImageStatus.Instance.PlayPeople);
+        //Debug.Log("参加人数："+ReadImageStatus.Instance.PlayPeople);
+    }
 
 	//	プレイヤー数を切り替える.
 	public void SetPlayerNumber ( int playerNumber ) {
@@ -27,7 +32,7 @@ public class mbGameManager : MonoBehaviour {
 		m_playerIndex = ( m_playerIndex + 1 ) % m_playerMax;
 	}
 
-
+/*
 #if UNITY_EDITOR
 	void OnGUI () {
 
@@ -56,4 +61,6 @@ public class mbGameManager : MonoBehaviour {
 		GUILayout.EndVertical ();
 	}
 #endif
+*/
+
 }

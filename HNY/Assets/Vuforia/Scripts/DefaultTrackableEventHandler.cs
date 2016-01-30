@@ -87,7 +87,7 @@ namespace Vuforia
             
             //Numberの管理クラスへ
             ReadImageStatus.Instance.Number = int.Parse(mTrackableBehaviour.TrackableName);
-            if(Application.loadedLevel == 0) ReadImageStatus.Instance.JoinPeople();
+            ReadImageStatus.Instance.UpdateManage();
             ReadImageStatus.Instance.NumberCheck = false;
             
         }
