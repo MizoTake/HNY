@@ -33,6 +33,8 @@ public class mbModelController : MonoBehaviour {
 
 	public AudioSource[] m_animalVoiceList;
 
+	public AnimalLineManage m_AnimalLineManage;
+
 	bool m_isDoneAnimation = true;
 	public bool IsDone {
 		get { return m_isDoneAnimation; }
@@ -162,5 +164,6 @@ public class mbModelController : MonoBehaviour {
 	}
 
 	void updateBeforeGetAnimalInfo ( int playerIndex, int animalIndex ) {
+	//	m_AnimalLineManage.currentNum = animalIndex;
 	}
 }

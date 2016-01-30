@@ -27,6 +27,8 @@ public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 	//	カメラから取得した
 	public void GetYearValueByCamera ( int year ) {
 
+		if ( m_ModelController.IsDone ) return;
+
 		if ( m_playerMax == 0 ) {
 			Debug.LogError ( "playerMax is 0." );
 			return;
