@@ -85,9 +85,11 @@ namespace Vuforia
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
             
-            //記述したコード
-            TestARNumber.Instance.ImageNumber = int.Parse(mTrackableBehaviour.TrackableName);
-            Debug.Log("代入"+TestARNumber.Instance.ImageNumber);
+            //Numberの管理クラスへ
+            ReadImageStatus.Instance.Number = int.Parse(mTrackableBehaviour.TrackableName);
+            if(Application.loadedLevel == 0) ReadImageStatus.Instance.JoinPeople();
+            ReadImageStatus.Instance.NumberCheck = false;
+            
         }
 
 
@@ -107,8 +109,11 @@ namespace Vuforia
             {
                 component.enabled = false;
             }
-
+            
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            
+            //ReadImageStatus.Instance.JoinPeople();
+            ReadImageStatus.Instance.NumberCheck = true;
         }
 
         #endregion // PRIVATE_METHODS

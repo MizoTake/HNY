@@ -13,6 +13,7 @@ public class TestARNumber : SingletonMonoBehaviour<TestARNumber> {
 	void Start () {
         _textObj = GetComponent<Text>();
 	   _imageNumber = -1;
+       _textObj.text = "";
 	}
 	
 	// Update is called once per frame
