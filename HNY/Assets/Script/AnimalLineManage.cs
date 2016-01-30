@@ -50,8 +50,6 @@ public class AnimalLineManage : MonoBehaviour {
 			firstJudge [i] = false;
 			judges [i] = false;
 		}
-		judges [3] = true;
-		currentNum = 3;
 	}
 	
 	// Update is called once per frame
