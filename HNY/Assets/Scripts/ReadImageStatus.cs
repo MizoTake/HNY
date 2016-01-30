@@ -59,7 +59,8 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
                 JoinPeople();
                 //MainSceneへ
                 if(SceneToGame){
-                    Application.LoadLevel(STATE_MAIN);
+                    //Application.LoadLevel(STATE_MAIN);
+                    FadeManager.Instance.LoadLevel("Main", 0.5f);
                 }
                 break;
            case STATE_MAIN:
