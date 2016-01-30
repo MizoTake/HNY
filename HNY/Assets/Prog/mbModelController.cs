@@ -64,7 +64,7 @@ public class mbModelController : MonoBehaviour {
 			firstIndex = Random.Range ( 0, m_centerObjs.Length );
 		}
 
-		m_AnimalLineManage.currentNum = firstIndex;
+		updateBeforeGetAnimalInfo ( 0, firstIndex );
 
 		Debug.Log ( "firstIndex" + firstIndex.ToString () );
 
@@ -115,7 +115,8 @@ public class mbModelController : MonoBehaviour {
 		//	プレイヤーの取得した干支を更新する.
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
-		yield return StartCoroutine ( m_GetEffect.RunEffects ( 0, m_centerObjs [ m_centerPos ].transform.position,
+		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, m_centerObjs [ m_centerPos ].transform.position,
+	//	yield return StartCoroutine ( m_GetEffect.RunEffects ( -1, m_centerObjs [ m_centerPos ].transform.position,
 			m_PlayerGetObjPos [ playerIndex ].transform.position ) );
 
 		//	ボイス再生.

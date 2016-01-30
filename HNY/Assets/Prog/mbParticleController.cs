@@ -26,7 +26,7 @@ public class mbParticleController : MonoBehaviour {
 	IEnumerator runEffect ( int colorIndex, ParticleSystem particle,  Vector3 basePos, Vector3 targetPos, float runEffectTime ) {
 
 		transform.position = basePos;
-	//	particle.startColor = m_ColorList [ colorIndex ];
+		particle.startColor = ( colorIndex == -1 ) ? Color.white : m_ColorList [ colorIndex ];
 		particle.gameObject.SetActive ( true );
 
 		float timer = runEffectTime;
