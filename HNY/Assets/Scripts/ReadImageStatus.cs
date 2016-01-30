@@ -25,6 +25,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
 	// Use this for initialization
 	void Start () {
 	   _peopleNumber = MIN_NUMBER + 1;
+       PlayPeople = _peopleNumber;
        //TestARNumber.Instance.ImageNumber = _peopleNumber;
        SceneToNext = false;
        _initMain = true;
@@ -78,12 +79,11 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     public void JoinPeople(){
         switch(Number){
             case 1:
-                if(!NumberCheck || _peopleNumber >= MAX_NUMBER) break;
+                if(!NumberCheck && _peopleNumber >= MAX_NUMBER) break;
                 _peopleNumber += 1;
-                
                 break;
             case 2:
-                if(!NumberCheck || _peopleNumber <= MIN_NUMBER) break;
+                if(!NumberCheck && _peopleNumber <= MIN_NUMBER) break;
                 _peopleNumber -= 1;
                 break;
             case 3:
@@ -97,16 +97,19 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     }
     
     private void NumberUpdate(){
+        /*
         if(_initMain) {
             Number = -1;
             //mbGameManager.Instance.SetPlayerNumber(PlayPeople);
             //Debug.Log("参加人数："+PlayPeople);
             _initMain = false;
         }
+        */
         if(Number == 4){
             SceneToNext = true;
+        }else{
+            //TestARNumber.Instance.ImageNumber = Number;
+            mbGameManager.Instance.GetYearValueByCamera(Number);
         }
-        //TestARNumber.Instance.ImageNumber = Number;
-        mbGameManager.Instance.GetYearValueByCamera(Number);
     }
 }
