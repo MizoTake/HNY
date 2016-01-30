@@ -33,6 +33,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
        //Debug.Log(Application.loadedLevel);
 	   switch(Application.loadedLevel){
            case STATE_MANU:
@@ -48,7 +49,26 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
                 NumberUpdate();
                 break;
        }
+       */
 	}
+    
+    public void UpdateManage(){
+        //Debug.Log(Application.loadedLevel);
+	   switch(Application.loadedLevel){
+           case STATE_MANU:
+                JoinPeople();
+                //MainSceneへ
+                if(SceneToGame){
+                    //Application.LoadLevel(STATE_MAIN);
+                    FadeManager.Instance.LoadLevel("Main", 0.5f);
+                }
+                break;
+           case STATE_MAIN:
+                //年を進める数字の更新処理
+                NumberUpdate();
+                break;
+       }
+    }
     
     public void JoinPeople(){
         switch(Number){
@@ -62,19 +82,23 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
                 _peopleNumber -= 1;
                 break;
             case 3:
-                SceneToGame = true;
                 _initMain = true;
+                SceneToGame = true;
                 break;
         }
         //更新
         TestARNumber.Instance.ImageNumber = _peopleNumber;
+        PlayPeople = _peopleNumber;
     }
     
     private void NumberUpdate(){
         if(_initMain) {
             Number = -1;
+            //mbGameManager.Instance.SetPlayerNumber(PlayPeople);
+            //Debug.Log("参加人数："+PlayPeople);
             _initMain = false;
         }
-        TestARNumber.Instance.ImageNumber = Number;
+        //TestARNumber.Instance.ImageNumber = Number;
+        mbGameManager.Instance.GetYearValueByCamera(Number);
     }
 }
