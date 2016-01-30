@@ -29,7 +29,11 @@ public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 
 		if ( !m_ModelController.IsDone ) return;
 
-		if ( m_playerMax == 0 ) {
+		if ( year <= 0 ) {
+			return;
+		}
+
+		if ( m_playerMax <= 0 ) {
 			Debug.LogError ( "playerMax is 0." );
 			return;
 		}
