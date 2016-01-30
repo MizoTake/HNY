@@ -164,6 +164,6 @@ public class mbModelController : MonoBehaviour {
 	}
 
 	void updateBeforeGetAnimalInfo ( int playerIndex, int animalIndex ) {
-	//	m_AnimalLineManage.currentNum = animalIndex;
+		m_AnimalLineManage.currentNum = animalIndex;
 	}
 }
