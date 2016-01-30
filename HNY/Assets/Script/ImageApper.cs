@@ -29,6 +29,7 @@ public class ImageApper : MonoBehaviour {
 			onPlayerImages [currentPlayer] = animalImages [animalState];
 			string names = "AnimalApper" + currentPlayer.ToString();
 			root.transform.FindChild (names).GetComponent<RawImage> ().texture = onPlayerImages [currentPlayer];
+			stateJudge = false;
 		}
 	}
 
