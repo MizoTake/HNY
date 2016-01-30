@@ -5,7 +5,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     
     public bool NumberCheck{ get; set; }
     
-    public bool SceneToGame{ get; set; }
+    public bool SceneToNext{ get; set; }
     
     public int Number{ get; set; }
     
@@ -24,9 +24,9 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
 
 	// Use this for initialization
 	void Start () {
-	   _peopleNumber = MIN_NUMBER;
-       TestARNumber.Instance.ImageNumber = _peopleNumber;
-       SceneToGame = false;
+	   _peopleNumber = MIN_NUMBER + 1;
+       //TestARNumber.Instance.ImageNumber = _peopleNumber;
+       SceneToNext = false;
        _initMain = true;
        DontDestroyOnLoad(this.gameObject);
 	}
@@ -39,7 +39,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
            case STATE_MANU:
                 //JoinPeople();
                 //MainSceneへ
-                if(SceneToGame){
+                if(SceneToNext){
                     PlayPeople = Number;
                     Application.LoadLevel(STATE_MAIN);
                 }
@@ -58,14 +58,19 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
            case STATE_MANU:
                 JoinPeople();
                 //MainSceneへ
-                if(SceneToGame){
+                if(SceneToNext){
                     //Application.LoadLevel(STATE_MAIN);
                     FadeManager.Instance.LoadLevel("Main", 0.5f);
+                    SceneToNext = false;
                 }
                 break;
            case STATE_MAIN:
                 //年を進める数字の更新処理
                 NumberUpdate();
+                if(SceneToNext){
+                    FadeManager.Instance.LoadLevel("Menu", 0.5f);
+                    SceneToNext = false;
+                }
                 break;
        }
     }
@@ -83,11 +88,11 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
                 break;
             case 3:
                 _initMain = true;
-                SceneToGame = true;
+                SceneToNext = true;
                 break;
         }
         //更新
-        TestARNumber.Instance.ImageNumber = _peopleNumber;
+        //TestARNumber.Instance.ImageNumber = _peopleNumber;
         PlayPeople = _peopleNumber;
     }
     
@@ -97,6 +102,9 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
             //mbGameManager.Instance.SetPlayerNumber(PlayPeople);
             //Debug.Log("参加人数："+PlayPeople);
             _initMain = false;
+        }
+        if(Number == 4){
+            SceneToNext = true;
         }
         //TestARNumber.Instance.ImageNumber = Number;
         mbGameManager.Instance.GetYearValueByCamera(Number);
