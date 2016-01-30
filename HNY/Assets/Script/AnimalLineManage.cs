@@ -85,7 +85,9 @@ public class AnimalLineManage : MonoBehaviour {
 		}
 		if(alphaManage[num] <= MAX_LIGHT && firstJudge[num] == true){
 			alphaManage [num] += ADD_SPEED;
-			lines [num].color = new Color (255, 255, 255, alphaManage [num]);
+			Color c = lines [num].color;
+			c.a = alphaManage [num];
+			lines [num].color = c;
 		}
 	}
 
@@ -94,7 +96,9 @@ public class AnimalLineManage : MonoBehaviour {
 			alphaManage [deleterNum] -= ADD_SPEED;
 		}
 		firstJudge [deleterNum] = false;
-		lines [deleterNum].color = new Color (255, 255, 255, alphaManage [deleterNum]);
+		Color c = lines [deleterNum].color;
+		c.a = alphaManage [deleterNum];
+		lines [deleterNum].color = c;
 		yield return null;
 	}
 }
