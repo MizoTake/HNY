@@ -40,7 +40,7 @@ public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 	}
 
 
-#if UNITY_EDITOR || false
+#if UNITY_EDITOR && false
 	void OnGUI () {
 
 		if ( !m_ModelController.IsDone ) {
