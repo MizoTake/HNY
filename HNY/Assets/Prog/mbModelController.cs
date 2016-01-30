@@ -29,6 +29,12 @@ public class mbModelController : MonoBehaviour {
 
 	public GameObject[] m_PlayerGetObjPos;
 
+	public mbParticleController m_GetEffect;
+
+	public AudioSource[] m_animalVoiceList;
+
+	public AnimalLineManage m_AnimalLineManage;
+
 	bool m_isDoneAnimation = true;
 	public bool IsDone {
 		get { return m_isDoneAnimation; }
@@ -106,7 +112,17 @@ public class mbModelController : MonoBehaviour {
 
 		//	プレイヤーの取得した干支を更新する.
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
-		yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
+	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
+		yield return StartCoroutine ( m_GetEffect.RunEffects ( 0, m_centerObjs [ m_centerPos ].transform.position,
+			m_PlayerGetObjPos [ playerIndex ].transform.position ) );
+
+		//	ボイス再生.
+		playAnimalVoice ( m_centerPos );
+
+		//	直前に取得した干支の情報更新.
+		updateBeforeGetAnimalInfo ( playerIndex, m_centerPos );
+
+		m_isDoneAnimation = true;
 	}
 
 	void setObjPos ( float animationRate ) {
@@ -127,32 +143,27 @@ public class mbModelController : MonoBehaviour {
 		m_centerObjs [ objIndex ].transform.localPosition = pos;
 	}
 
-	IEnumerator updateGetObj ( int playerIndex, int objIndex ) {
+	void playAnimalVoice ( int index ) {
 
-		if ( m_uiBeforeGetObjs == null )
-			yield break;
+		if ( m_animalVoiceList == null ) return;
+		if ( index < 0 || index >= m_animalVoiceList.Length ) return;
+		if ( m_animalVoiceList [ index ] == null ) return;
 
-		//	前回取得した干支のオブジェクトを削除.
-		if ( m_uiBeforeGetObjs [ playerIndex ] != null ) {
-			GameObject.Destroy ( m_uiBeforeGetObjs [ playerIndex ] );
-		}
+		StartCoroutine ( playAudioSource ( m_animalVoiceList [ index ] ) );
+	}
 
-		//	移動元,移動先.
-		Transform baseTrans = m_centerObjs [ m_centerPos ].transform;
-		Transform targetTrans = m_PlayerGetObjPos [ playerIndex ].transform;
+	IEnumerator playAudioSource ( AudioSource prefab ) {
 
-		//	今回取得した干支のオブジェクトを生成.
-		m_uiBeforeGetObjs [ playerIndex ] = GameObject.Instantiate ( m_Prefab [ objIndex ] ) as GameObject;
-		m_uiBeforeGetObjs [ playerIndex ].transform.parent = m_ObjParent.transform;
-		m_uiBeforeGetObjs [ playerIndex ].transform.position = baseTrans.position;
+		AudioSource audio = Object.Instantiate ( prefab ) as AudioSource;
 
-		float timer = m_GetObjAnimationTime;
-		while ( timer > 0.0f ) {
-			timer -= Time.deltaTime;
-			m_uiBeforeGetObjs [ playerIndex ].transform.position = Vector3.Lerp ( baseTrans.position, targetTrans.position, 1.0f - ( timer / m_GetObjAnimationTime ) );
-			yield return null;
-		}
+		audio.Play ();
 
-		m_isDoneAnimation = true;
+		while ( audio.isPlaying ) yield return null;
+
+		Object.Destroy ( audio );
+	}
+
+	void updateBeforeGetAnimalInfo ( int playerIndex, int animalIndex ) {
+	//	m_AnimalLineManage.currentNum = animalIndex;
 	}
 }

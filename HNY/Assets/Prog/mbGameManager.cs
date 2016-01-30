@@ -27,14 +27,25 @@ public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 	//	カメラから取得した
 	public void GetYearValueByCamera ( int year ) {
 
+		if ( m_ModelController.IsDone ) return;
+
+		if ( m_playerMax == 0 ) {
+			Debug.LogError ( "playerMax is 0." );
+			return;
+		}
+
 		m_ModelController.SelectYear ( m_playerIndex, year );
 
 		m_playerIndex = ( m_playerIndex + 1 ) % m_playerMax;
 	}
 
-/*
-#if UNITY_EDITOR
+
+#if UNITY_EDITOR || true
 	void OnGUI () {
+
+		if ( !m_ModelController.IsDone ) {
+			return;
+		}
 
 		GUILayout.BeginVertical ();
 
@@ -61,6 +72,6 @@ public class mbGameManager : SingletonMonoBehaviour<mbGameManager> {
 		GUILayout.EndVertical ();
 	}
 #endif
-*/
+
 
 }
