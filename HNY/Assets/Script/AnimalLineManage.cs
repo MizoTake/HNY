@@ -71,7 +71,7 @@ public class AnimalLineManage : MonoBehaviour {
 		for(int i = 0; i < 12; i++){
 			judges[i] = false;
 		}
-		judges [currentNum];
+		judges [currentNum] = true;
 	}
 
 	private IEnumerator turnOn(int num){
