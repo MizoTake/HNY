@@ -20,7 +20,7 @@ public class mbParticleController : MonoBehaviour {
 	public IEnumerator RunEffects ( int colorIndex, Vector3 basePos, Vector3 targetPos ) {
 		yield return StartCoroutine ( runEffect ( colorIndex, m_ShineEffect, basePos, basePos, m_ShineEffectTime ) );
 		yield return StartCoroutine ( runEffect ( colorIndex, m_TrailEffect, basePos, targetPos, m_RunEffectTime ) );
-		yield return StartCoroutine ( runEffect ( colorIndex, m_GetEffect, targetPos, targetPos, m_GetEffectTime ) );
+		StartCoroutine ( runEffect ( colorIndex, m_GetEffect, targetPos, targetPos, m_GetEffectTime ) );
 	}
 
 	IEnumerator runEffect ( int colorIndex, ParticleSystem particle,  Vector3 basePos, Vector3 targetPos, float runEffectTime ) {
