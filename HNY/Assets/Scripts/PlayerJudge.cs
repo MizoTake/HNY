@@ -12,7 +12,7 @@ public class PlayerJudge : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		member = 4;
+		member = ReadImageStatus.Instance.PlayPeople;
 		root = GameObject.Find ("Canvas/Panel");
 		for (int i = 0; i < 6; i++) {
 			string names = "Player" + (i + 1).ToString ();
