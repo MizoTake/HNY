@@ -64,6 +64,8 @@ public class mbModelController : MonoBehaviour {
 			firstIndex = Random.Range ( 0, m_centerObjs.Length );
 		}
 
+		m_AnimalLineManage.currentNum = firstIndex;
+
 		Debug.Log ( "firstIndex" + firstIndex.ToString () );
 
 		m_centerPos = firstIndex;
