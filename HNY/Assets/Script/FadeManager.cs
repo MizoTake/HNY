@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// シーン遷移時のフェードイン・アウトを制御するためのクラス
@@ -68,12 +69,13 @@ public class FadeManager: SingletonMonoBehaviour<FadeManager>
 
 		Debug.Log ("切り替わるよ");
 		//シーン切替
-		Application.LoadLevel (scene);
+		//Application.LoadLevel (scene);
+        SceneManager.LoadScene(scene);
 
 		Debug.Log ("切り替えた");
 		yield return new WaitForSeconds (0.2f);
 		Debug.Log ("シーンの番号");
-		Debug.Log ("シーン"+Application.loadedLevel);
+		//Debug.Log ("シーン"+Application.loadedLevel);
 
 		//だんだん明るく
 		time = 0;

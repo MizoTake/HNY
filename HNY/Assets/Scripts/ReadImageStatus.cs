@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     public AudioClip _selectSE;
@@ -18,7 +19,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     public int PlayPeople{ get; set; }
     
     //state
-    private const int STATE_MANU = 0;
+    private const int STATE_MENU = 0;
     private const int STATE_MAIN = 1;
     
     private bool _initMain;
@@ -58,12 +59,12 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
                 break;
        }
        */
+        Debug.Log("しーん"+SceneManager.sceneCountInBuildSettings + "  " + SceneManager.sceneCount);
 	}
     
     public void UpdateManage(){
-        //Debug.Log(Application.loadedLevel);
-	   switch(Application.loadedLevel){
-           case STATE_MANU:
+	   switch(SceneManager.GetActiveScene().buildIndex){
+           case STATE_MENU:
                 JoinPeople();
                 //MainSceneへ
                 if(SceneToNext){

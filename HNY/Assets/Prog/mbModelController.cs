@@ -51,12 +51,13 @@ public class mbModelController : MonoBehaviour {
 		m_ObjParent.transform.parent = transform;
 		m_ObjParent.SetActive ( false );
 		m_centerObjs = new GameObject [ m_Prefab.Length ];
-
+        /*
 		Shader shader = Shader.Find ( "Bumped Diffuse" );
 		if ( shader == null ) {
 			Debug.LogError ( "shader is null" );
 			return;
 		}
+        */
 
 		for (int i = 0; i < m_centerObjs.Length; ++i) {
 			m_centerObjs [ i ] = GameObject.Instantiate ( m_Prefab [ i ] ) as GameObject;
@@ -64,10 +65,11 @@ public class mbModelController : MonoBehaviour {
 
 			var renderers = m_centerObjs [ i ].GetComponentsInChildren<MeshRenderer> ();
 			foreach ( MeshRenderer ren in renderers ) {
-				ren.material.shader = shader;
+				//ren.material.shader = shader;
 			}
 
 		}
+
 	}
 
 	public void SetStartParameter ( int playerMax, int firstIndex = -1 ) {
