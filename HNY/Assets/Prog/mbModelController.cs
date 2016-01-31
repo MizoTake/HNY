@@ -40,6 +40,9 @@ public class mbModelController : MonoBehaviour {
 	public bool IsDone {
 		get { return m_isDoneAnimation; }
 	}
+
+	public Camera m_Camera;
+	public RectTransform m_CanvasTrans;
 		
 	public void Start () {
 
@@ -134,15 +137,19 @@ public class mbModelController : MonoBehaviour {
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
 		Vector3 basePos = m_centerObjs [ m_centerPos ].transform.position;
-		Vector3 targetPos = m_PlayerGetObjPos [ playerIndex ].transform.position;
-		basePos.z = targetPos.z = -0.1f;
+		Debug.LogWarning ( m_PlayerGetObjPos [ playerIndex ].transform.localPosition );
 
-		Debug.Log ( "Screen : " + Screen.width + ", " + Screen.height );
-		targetPos.x *= (float)Screen.width / 860;
-		targetPos.y *= (float)Screen.height / 600;
+		Vector3 targetPos = m_Camera.ScreenToWorldPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
 
-	//	Vector3 targetPos = Camera.main.WorldToScreenPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
-	//	Debug.Log ( m_PlayerGetObjPos [ playerIndex ].transform.position.ToString () + " : " + targetPos.ToString () );
+		Debug.LogWarning ( targetPos.ToString () );
+
+		float cl = -2 * m_PlayerGetObjPos [ playerIndex ].transform.localPosition.x / m_CanvasTrans.rect.width;
+		targetPos.x = m_Camera.ScreenToWorldPoint ( m_PlayerGetObjPos [ 0 ].transform.position ).x * cl * 1.1f;
+
+
+		Vector3 dir = ( targetPos - m_Camera.transform.position ).normalized;
+		targetPos = m_Camera.transform.position - m_Camera.transform.position.z * dir;
+
 		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, basePos, targetPos ) );
 
 		//	ボイス再生.
