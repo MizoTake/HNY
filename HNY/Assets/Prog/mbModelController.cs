@@ -134,7 +134,15 @@ public class mbModelController : MonoBehaviour {
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
 		Vector3 basePos = m_centerObjs [ m_centerPos ].transform.position;
-		Vector3 targetPos = Camera.main.WorldToScreenPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
+		Vector3 targetPos = m_PlayerGetObjPos [ playerIndex ].transform.position;
+		basePos.z = targetPos.z = -0.1f;
+
+		Debug.Log ( "Screen : " + Screen.width + ", " + Screen.height );
+		targetPos.x *= (float)Screen.width / 860;
+		targetPos.y *= (float)Screen.height / 600;
+
+	//	Vector3 targetPos = Camera.main.WorldToScreenPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
+	//	Debug.Log ( m_PlayerGetObjPos [ playerIndex ].transform.position.ToString () + " : " + targetPos.ToString () );
 		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, basePos, targetPos ) );
 
 		//	ボイス再生.
