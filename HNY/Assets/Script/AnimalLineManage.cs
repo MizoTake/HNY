@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class AnimalLineManage : MonoBehaviour {
 	//定数宣言
-	private const float MIN_LIGHT = 0.2f;
+	private const float MIN_LIGHT = 0.5f;
 	private const float MAX_LIGHT = 1;
-	private const float WAIT_FRAME = 0.4f;
+	private const float WAIT_FRAME = 0.3f;
 	private const float ADD_SPEED = 0.1f;
 
 	private Image[] lines = new Image[12];  //干支のイメージ配列
