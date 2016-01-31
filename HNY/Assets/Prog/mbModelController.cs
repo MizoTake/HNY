@@ -129,9 +129,14 @@ public class mbModelController : MonoBehaviour {
 		//	プレイヤーの取得した干支を更新する.
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
-		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, m_centerObjs [ m_centerPos ].transform.position,
-	//	yield return StartCoroutine ( m_GetEffect.RunEffects ( -1, m_centerObjs [ m_centerPos ].transform.position,
-			m_PlayerGetObjPos [ playerIndex ].transform.position ) );
+		Vector3 basePos = m_centerObjs [ m_centerPos ].transform.position;
+		Vector3 targetPos = m_PlayerGetObjPos [ playerIndex ].transform.position;
+		Vector3 targetCameraPos = Camera.main.WorldToScreenPoint ( targetPos );
+
+		Vector3 dir = ( targetPos - targetCameraPos ).normalized;
+		targetPos = targetCameraPos + dir * -targetCameraPos.z;
+
+		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, basePos, targetPos ) );
 
 		//	ボイス再生.
 		playAnimalVoice ( m_centerPos );
