@@ -26,9 +26,11 @@ public class ImageApper : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (stateJudge == true) {
-			onPlayerImages [currentPlayer] = animalImages [animalState];
+			//Debug.LogError (currentPlayer - 1 + " : " + animalState);
+			onPlayerImages [currentPlayer - 1] = animalImages [animalState];
+
 			string names = "AnimalApper" + currentPlayer.ToString();
-			root.transform.FindChild (names).GetComponent<RawImage> ().texture = onPlayerImages [currentPlayer];
+			root.transform.FindChild (names).GetComponent<RawImage> ().texture = onPlayerImages [currentPlayer - 1];
 			stateJudge = false;
 		}
 	}
