@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
+    public AudioClip _selectSE;
+    public AudioClip _decisionSE;
+    private AudioSource _se;
     
     public bool NumberCheck{ get; set; }
     
@@ -30,6 +33,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
        SceneToNext = false;
        _initMain = true;
        DontDestroyOnLoad(this.gameObject);
+       _se = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -81,14 +85,17 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
             case 1:
                 if(!NumberCheck && _peopleNumber >= MAX_NUMBER) break;
                 _peopleNumber += 1;
+                _se.PlayOneShot(_selectSE);
                 break;
             case 2:
                 if(!NumberCheck && _peopleNumber <= MIN_NUMBER) break;
                 _peopleNumber -= 1;
+                _se.PlayOneShot(_selectSE);
                 break;
             case 3:
                 _initMain = true;
                 SceneToNext = true;
+                _se.PlayOneShot(_decisionSE);
                 break;
         }
         //更新
