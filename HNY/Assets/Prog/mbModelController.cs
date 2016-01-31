@@ -52,7 +52,7 @@ public class mbModelController : MonoBehaviour {
 		m_ObjParent.SetActive ( false );
 		m_centerObjs = new GameObject [ m_Prefab.Length ];
 
-		Shader shader = Shader.Find ( "Bumped Diffuse" );
+		Shader shader = Shader.Find ( "Mobile/Bumped Diffuse" );
 		if ( shader == null ) {
 			Debug.LogError ( "shader is null" );
 			return;
@@ -130,12 +130,7 @@ public class mbModelController : MonoBehaviour {
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
 		Vector3 basePos = m_centerObjs [ m_centerPos ].transform.position;
-		Vector3 targetPos = m_PlayerGetObjPos [ playerIndex ].transform.position;
-		Vector3 targetCameraPos = Camera.main.WorldToScreenPoint ( targetPos );
-
-		Vector3 dir = ( targetPos - targetCameraPos ).normalized;
-		targetPos = targetCameraPos + dir * -targetCameraPos.z;
-
+		Vector3 targetPos = Camera.main.WorldToScreenPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
 		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, basePos, targetPos ) );
 
 		//	ボイス再生.
