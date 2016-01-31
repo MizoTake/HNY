@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Panel2
+    uniqueID: 3504213903
+    locked: 0
+  - name: Panel1
+    uniqueID: 598654047
+    locked: 0
