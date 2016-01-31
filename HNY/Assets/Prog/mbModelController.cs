@@ -51,13 +51,12 @@ public class mbModelController : MonoBehaviour {
 		m_ObjParent.transform.parent = transform;
 		m_ObjParent.SetActive ( false );
 		m_centerObjs = new GameObject [ m_Prefab.Length ];
-        /*
-		Shader shader = Shader.Find ( "Bumped Diffuse" );
+
+		Shader shader = Shader.Find ( "Mobile/Bumped Diffuse" );
 		if ( shader == null ) {
 			Debug.LogError ( "shader is null" );
 			return;
 		}
-        */
 
 		for (int i = 0; i < m_centerObjs.Length; ++i) {
 			m_centerObjs [ i ] = GameObject.Instantiate ( m_Prefab [ i ] ) as GameObject;
@@ -65,11 +64,10 @@ public class mbModelController : MonoBehaviour {
 
 			var renderers = m_centerObjs [ i ].GetComponentsInChildren<MeshRenderer> ();
 			foreach ( MeshRenderer ren in renderers ) {
-				//ren.material.shader = shader;
+				ren.material.shader = shader;
 			}
 
 		}
-
 	}
 
 	public void SetStartParameter ( int playerMax, int firstIndex = -1 ) {
@@ -131,9 +129,9 @@ public class mbModelController : MonoBehaviour {
 		//	プレイヤーの取得した干支を更新する.
 		Debug.Log ( "player" + playerIndex.ToString () + " get " + m_centerPos.ToString () );
 	//	yield return StartCoroutine ( updateGetObj ( playerIndex, m_centerPos ) );
-		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, m_centerObjs [ m_centerPos ].transform.position,
-	//	yield return StartCoroutine ( m_GetEffect.RunEffects ( -1, m_centerObjs [ m_centerPos ].transform.position,
-			m_PlayerGetObjPos [ playerIndex ].transform.position ) );
+		Vector3 basePos = m_centerObjs [ m_centerPos ].transform.position;
+		Vector3 targetPos = Camera.main.WorldToScreenPoint ( m_PlayerGetObjPos [ playerIndex ].transform.position );
+		yield return StartCoroutine ( m_GetEffect.RunEffects ( playerIndex, basePos, targetPos ) );
 
 		//	ボイス再生.
 		playAnimalVoice ( m_centerPos );
