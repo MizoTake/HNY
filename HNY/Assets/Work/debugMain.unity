@@ -4490,7 +4490,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 614881296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6282,12 +6282,12 @@ MonoBehaviour:
   m_AnimationDist: 5
   m_GetObjAnimationTime: 0.5
   m_PlayerGetObjPos:
-  - {fileID: 504701496}
-  - {fileID: 1777392091}
-  - {fileID: 659886754}
-  - {fileID: 1997123594}
-  - {fileID: 1316437161}
-  - {fileID: 512367671}
+  - {fileID: 209089482}
+  - {fileID: 1723471373}
+  - {fileID: 2016531909}
+  - {fileID: 1651652229}
+  - {fileID: 723007455}
+  - {fileID: 1369039255}
   m_GetEffect: {fileID: 256633066}
   m_animalVoiceList:
   - {fileID: 8220120, guid: 35f9cf6cf4e7f9f4bb8dc6a67ee06b4e, type: 2}
@@ -6304,6 +6304,8 @@ MonoBehaviour:
   - {fileID: 8285170, guid: 35f9cf6cf4e7f9f4bb8dc6a67ee06b4e, type: 2}
   m_AnimalLineManage: {fileID: 711792555}
   m_ImageAppear: {fileID: 897738651}
+  m_Camera: {fileID: 614881300}
+  m_CanvasTrans: {fileID: 736726565}
 --- !u!4 &1459544350
 Transform:
   m_ObjectHideFlags: 0
@@ -6321,7 +6323,7 @@ Transform:
   - {fileID: 1316437162}
   - {fileID: 512367672}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!224 &1533799498 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22467208, guid: 51e738234a1c043909901d614bb6a2e7,
