@@ -64,7 +64,11 @@ public class mbModelController : MonoBehaviour {
 
 			var renderers = m_centerObjs [ i ].GetComponentsInChildren<MeshRenderer> ();
 			foreach ( MeshRenderer ren in renderers ) {
-				ren.material.shader = shader;
+
+				//	マテリアルにテクスチャがある場合のみ差し替え.
+				if ( ren.material.mainTexture != null ) {
+					ren.material.shader = shader;
+				}
 			}
 
 		}
