@@ -6,6 +6,9 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     public AudioClip _decisionSE;
     private AudioSource _se;
     
+    private GameObject _ARforPC;
+    private GameObject _ARforSmartPhone;
+    
     public bool NumberCheck{ get; set; }
     
     public bool SceneToNext{ get; set; }
@@ -106,7 +109,7 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     private void NumberUpdate(){
         /*
         if(_initMain) {
-            Number = -1;
+            //Number = -1;
             //mbGameManager.Instance.SetPlayerNumber(PlayPeople);
             //Debug.Log("参加人数："+PlayPeople);
             _initMain = false;
