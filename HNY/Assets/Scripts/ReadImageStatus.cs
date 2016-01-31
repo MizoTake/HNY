@@ -87,12 +87,12 @@ public class ReadImageStatus : SingletonMonoBehaviour <ReadImageStatus> {
     public void JoinPeople(){
         switch(Number){
             case 1:
-                if(!NumberCheck && _peopleNumber >= MAX_NUMBER) break;
+                if(_peopleNumber >= MAX_NUMBER) break;
                 _peopleNumber += 1;
                 _se.PlayOneShot(_selectSE);
                 break;
             case 2:
-                if(!NumberCheck && _peopleNumber <= MIN_NUMBER) break;
+                if(_peopleNumber <= MIN_NUMBER) break;
                 _peopleNumber -= 1;
                 _se.PlayOneShot(_selectSE);
                 break;
